@@ -1076,7 +1076,6 @@ txBoolean fxModuleSetPrototype(txMachine* the, txSlot* instance, txSlot* prototy
 
 void fx_Compartment(txMachine* the)
 {
-	txSlot* module = mxFunctionInstanceHome(mxFunction->value.reference)->value.home.module;
 	txSlot* realm = C_NULL;
 	txSlot* filter = C_NULL;
 	txSlot* instance = C_NULL;
@@ -1085,7 +1084,9 @@ void fx_Compartment(txMachine* the)
 	txSlot* slot;
 	txID id;
 	
+	txSlot* module = mxFunctionInstanceHome(mxFunction->value.reference)->value.home.module;
 	if (!module) module = mxProgram.value.reference;
+
 	realm = mxModuleInstanceInternal(module)->value.module.realm;
 	filter = mxAvailableModules(realm)->value.reference;
 	mxTry(the) {
